@@ -1,0 +1,3 @@
+(executable
+ (name ambiguous_choice)
+ (libraries domainslib))

@@ -1,0 +1,4 @@
+(executable
+ (public_name ambiguous_choice)
+ (name main)
+ (libraries ambiguous_choice))
