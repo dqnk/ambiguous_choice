@@ -33,11 +33,13 @@ let single_thread_test ~fuel = run_test fuel
 (* convert return values to option for Task.parallel_find *)
 let wrap b = match b with false, _ -> None | true, x -> Some (true, x)
 
-(* convert back to bool - true if any of the threads had found the needle and false if none did *)
 let search_needle pool fuel =
   match
+    (* parallel ambiguous choice, picks a thread that returns Some a,
+       not guaranteed to stop as early as possible *)
     Task.parallel_find pool ~start:0 ~finish:fuel ~body:(fun _ ->
         wrap (run_test 1))
+    (* convert back to bool - true if any of the threads had found the needle and false if none did *)
   with
   | Some (true, x) -> (true, x)
   | _ -> (false, 0)
