@@ -50,14 +50,15 @@ let multi_thread_test ~fuel ~num_domains =
   Task.teardown_pool pool;
   res
 
-let fuel = 1_000_000
-let num_domains = 4;;
+let fuel = 1_000_000;;
 
 print_string "Single thread:\n";
 let result = single_thread_test ~fuel in
 print_string (string_of_bool (fst result) ^ " " ^ string_of_int (snd result));
 
-print_newline ();
+print_newline ()
+
+let num_domains = 4;;
 
 print_string "Multi thread:\n";
 let result = multi_thread_test ~fuel ~num_domains in
